@@ -1,0 +1,12 @@
+package com.example.BookMark.repository;
+
+import com.example.BookMark.entity.Bookmark;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;;
+
+public interface BookmarkRepository extends JpaRepository{
+    List<Bookmark> findByUserId(Long userId);
+    Optional<Bookmark> findByIdAndUserId(Long id, Long userId);
+}
