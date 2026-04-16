@@ -10,7 +10,6 @@ import lombok.Setter;
        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "name"}))
 @Getter @Setter @NoArgsConstructor
 public class Tag {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -3,7 +3,7 @@ package com.example.BookMark.dto;
 import com.example.BookMark.entity.Bookmark;
 import lombok.Getter;
 
-import java.util.LocalDateTime;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,7 +22,7 @@ public class BookmarkResponse {
         this.url = bookmark.getUrl();
         this.title = bookmark.getTitle();
         this.description = bookmark.getDescription();
-        this.createdAt = bookmark.getCreateAt();
-        this.tag = bookmark.getTag().stream().map(tag -> tag.getName()).collect(Collectors.toSet());
+        this.createdAt = bookmark.getCreatedAt();
+        this.tags = bookmark.getTags().stream().map(tag -> tag.getName()).collect(Collectors.toSet());
     }
 }

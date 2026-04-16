@@ -1,6 +1,6 @@
 package com.example.BookMark.dto;
 
-import jakart.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
