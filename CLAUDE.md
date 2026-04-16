@@ -7,14 +7,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 React (Vite) + Spring Boot 3 + PostgreSQL 15 + Docker Compose  
 Deploy: Vercel (frontend) + Render (backend + DB)
 
+## Current progress
+
+**Backend: COMPLETE and tested locally.**  
+**Next task: write tests, then start frontend.**
+
+Completed backend layers (all tested with curl):
+- Flyway migration (`V1__init_schema.sql`): users / bookmarks / tags / bookmark_tags
+- JPA Entities: `User`, `Bookmark`, `Tag`
+- Repositories: `UserRepository`, `BookmarkRepository`, `TagRepository`
+- Services: `AuthService`, `BookmarkService`
+- DTOs: `AuthRequest`, `AuthResponse`, `BookmarkRequest`, `BookmarkResponse`, `TagRequest`
+- Controllers: `AuthController` (`/api/auth/**`), `BookmarkController` (`/api/bookmarks/**`)
+- Security: `JwtUtil`, `JwtAuthFilter`, `SecurityConfig`
+
+**Next session should start with: writing tests for `BookmarkService` and `AuthService`, then frontend setup.**
+
+Known quirk: `/error` must be `permitAll()` in `SecurityConfig` so Spring Boot error responses are not blocked by Security.
+
 ## Local development
 
 ```bash
 # Start only the database (run backend from IDE for easier debugging)
 docker-compose up -d db
 
-# Backend
-cd backend && ./mvnw spring-boot:run
+# Backend (must use local profile for env vars)
+cd backend && ./mvnw spring-boot:run -Dspring-boot.run.profiles=local
 
 # Frontend
 cd frontend && npm run dev
