@@ -91,9 +91,8 @@ class AuthServiceTest {
         user.setEmail("wrongpsw@test.com");
         user.setPassword("hashed");
         // Arrange
-        // Mock 已經預設會回傳 false
         when(userRepository.findByEmail("wrongpsw@test.com")).thenReturn(Optional.of(user));
-        when(passwordEncoder.matches("password", "hashed")).thenReturn(false);
+        when(passwordEncoder.matches("password", "hashed")).thenReturn(false); // Mock 已經預設matches()會回傳 false
         // Act
         assertThatThrownBy(() -> authService.login("wrongpsw@test.com", "password"))
         .isInstanceOf(ResponseStatusException.class)
