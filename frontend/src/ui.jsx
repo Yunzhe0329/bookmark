@@ -138,6 +138,8 @@ export function TagBadge({ label, onClick, removable, onRemove, active }) {
       {label}
       {removable && (
         <span
+          role="button"
+          aria-label={`Remove ${label}`}
           onClick={e => { e.stopPropagation(); onRemove(); }}
           style={{ display: 'flex', alignItems: 'center', opacity: 0.6, cursor: 'pointer' }}
         >
