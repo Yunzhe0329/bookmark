@@ -51,4 +51,37 @@ describe('useBookmarks', () => {
     expect(result.current.bookmarks).toHaveLength(0)
     expect(api.delete).toHaveBeenCalledWith('/api/bookmarks/1')
   })
+
+  it('updateBookmark 正確計算 tag diff：新增 react、刪除 tool', async () => {
+  const existing = { ...MOCK_BM, id: 1, tags: ['dev', 'tool'] }
+  api.get.mockResolvedValueOnce({ data: [existing] })
+  api.put.mockResolvedValueOnce({ data: existing })
+  api.post.mockResolvedValueOnce({ data: { ...existing, tags: ['dev', 'tool', 'react'] } })
+  api.delete.mockResolvedValueOnce({ data: { ...existing, tags: ['dev', 'react'] } })
+
+  const { result } = renderHook(() => useBookmarks())
+  await waitFor(() => expect(result.current.bookmarks).toHaveLength(1))
+
+  await act(async () => {
+    await result.current.updateBookmark(1, {
+      url: 'https://a.com',
+      title: 'A',
+      description: '',
+      tags: ['dev', 'react'],   // 拿掉 tool，加入 react
+    })
+  })
+
+  // PUT 更新本體
+  expect(api.put).toHaveBeenCalledWith('/api/bookmarks/1', {
+    url: 'https://a.com', title: 'A', description: ''
+  })
+  // POST 新增 react
+  expect(api.post).toHaveBeenCalledWith('/api/bookmarks/1/tags', { name: 'react' })
+  // DELETE 移除 tool
+  expect(api.delete).toHaveBeenCalledWith('/api/bookmarks/1/tags/tool')
+  // dev 沒有被碰到
+  expect(api.post).not.toHaveBeenCalledWith('/api/bookmarks/1/tags', { name: 'dev' })
+  expect(api.delete).not.toHaveBeenCalledWith('/api/bookmarks/1/tags/dev')
+})
+
 })
