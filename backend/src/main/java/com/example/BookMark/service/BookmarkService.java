@@ -19,12 +19,12 @@ import java.util.List;
 public class BookmarkService {
     private final BookmarkRepository bookmarkRepository;
     private final TagRepository tagRepository;
-    // getAll bookmarks of this user
+    // 取得此用戶的所有書籤
     public List<Bookmark> getAll(User user){
         return bookmarkRepository.findByUserId(user.getId());
     }
     
-    // create a new tag and belong to this user
+    // 建立新書籤，屬於此用戶
     public Bookmark create(User user, String url, String title, String description){
         Bookmark bookmark = new Bookmark();
         bookmark.setUser(user);
@@ -34,7 +34,7 @@ public class BookmarkService {
         return bookmarkRepository.save(bookmark);
     }
     public Bookmark update(User user, Long bookmarkId, String url, String title, String description){
-        // make sure this tag belongs to this user
+        // 確認此書籤屬於當前用戶
         Bookmark bookmark = getOwnedBookmark(user, bookmarkId);
         bookmark.setUrl(url);
         bookmark.setTitle(title);
@@ -42,7 +42,7 @@ public class BookmarkService {
         return bookmark;
     }
     public void delete(User user, Long bookmarkId){
-        // make sure this tag belongs to this user
+        // 確認此書籤屬於當前用戶
         Bookmark bookmark = getOwnedBookmark(user, bookmarkId);
         bookmarkRepository.delete(bookmark);
     }
@@ -65,10 +65,10 @@ public class BookmarkService {
         return bookmark;
     }
 
-    // private helper: make sure the tag belong to the user
+    // 私有輔助方法：確認書籤屬於當前用戶
     private Bookmark getOwnedBookmark(User user, Long bookmarkId){
         return bookmarkRepository.findByIdAndUserId(bookmarkId, user.getId()).orElseThrow(() -> 
-            new ResponseStatusException(HttpStatus.NOT_FOUND, "Bookmark not found !"));
+            new ResponseStatusException(HttpStatus.NOT_FOUND, "找不到此書籤"));
     }
     
 }

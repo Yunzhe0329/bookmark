@@ -9,12 +9,12 @@ import lombok.Setter;
 @Getter @Setter
 public class AuthRequest {
     @NotBlank
-    @Email(message = "Invalid email format")
+    @Email(message = "電子郵件格式不正確")
     private String email;
 
     @NotBlank
 
-    @Size(min = 8, message = "Password must be at least 8 characters")
+    @Size(min = 8, message = "密碼至少需要 8 個字元")
     private String password;
     
 }

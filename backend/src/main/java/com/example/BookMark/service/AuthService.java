@@ -20,7 +20,7 @@ public class AuthService {
 
     public void register(String email, String password){
         if(userRepository.existsByEmail(email)){
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email is already in use");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "此電子郵件已被使用");
         }
         User user = new User();
         user.setEmail(email);
@@ -30,7 +30,7 @@ public class AuthService {
     public String login(String email, String password){
         User user = userRepository.findByEmail(email)
         .orElseThrow(() -> new ResponseStatusException(
-            HttpStatus.UNAUTHORIZED, "Invalid credentials"
+            HttpStatus.UNAUTHORIZED, "帳號或密碼錯誤"
         ));  
 
         if(!passwordEncoder.matches(password, user.getPassword())){

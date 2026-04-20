@@ -1,7 +1,4 @@
 // AuthPage.jsx — 登入 / 註冊頁面
-// TODO: handleSubmit 中替換 mock 為真實 API：
-//   POST /api/auth/login    → { email, password } → 回傳 { token }，存入 localStorage
-//   POST /api/auth/register → { email, password } → 201，跳轉 /login
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Icon from './Icons'

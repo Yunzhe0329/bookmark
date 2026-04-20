@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// Restcontroller can automatically convert return value into JSON
 @RestController
 @RequestMapping("/api/bookmarks")
 @RequiredArgsConstructor

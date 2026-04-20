@@ -6,6 +6,6 @@ import lombok.Setter;
 
 @Getter @Setter
 public class TagRequest {
-    @NotBlank(message = "Tag name is required")
+    @NotBlank(message = "標籤名稱為必填")
     private String name;
 }

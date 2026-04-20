@@ -64,7 +64,7 @@ export function AppLayout({ theme, onToggleTheme }) {
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <header style={{ height: 52, borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: 12, padding: '0 20px', flexShrink: 0, background: 'var(--bg)' }}>
 
-        {/* Logo */}
+        {/* 標誌 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginRight: 8, flexShrink: 0 }}>
           <div style={{ width: 24, height: 24, borderRadius: 6, background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
             <Icon.Bookmark />
@@ -72,7 +72,7 @@ export function AppLayout({ theme, onToggleTheme }) {
           <span style={{ fontWeight: 600, fontSize: 14, letterSpacing: '-0.02em', color: 'var(--text)' }}>Bookmark</span>
         </div>
 
-        {/* Search */}
+        {/* 搜尋 */}
         <div style={{ flex: 1, maxWidth: 420, position: 'relative' }}>
           <div style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-tertiary)', pointerEvents: 'none' }}>
             <Icon.Search />
@@ -87,18 +87,18 @@ export function AppLayout({ theme, onToggleTheme }) {
           />
         </div>
 
-        {/* Controls */}
+        {/* 操作列 */}
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-          {/* Layout toggle */}
+          {/* 版面切換 */}
           <div style={{ display: 'flex', gap: 2, background: 'var(--surface)', border: '1px solid var(--border-subtle)', borderRadius: 7, padding: 2 }}>
             <IconToggle active={layout === 'grid'} onClick={() => setLayout('grid')} title="格狀"><Icon.LayoutGrid /></IconToggle>
             <IconToggle active={layout === 'list'} onClick={() => setLayout('list')} title="列表"><Icon.LayoutList /></IconToggle>
           </div>
 
-          {/* Theme toggle */}
+          {/* 主題切換 */}
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
 
-          {/* New bookmark */}
+          {/* 新增書籤 */}
           <button
             onClick={() => setModal({ mode: 'create' })}
             style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', background: 'var(--accent)', border: 'none', borderRadius: 7, color: '#fff', fontWeight: 500, fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}
@@ -106,7 +106,7 @@ export function AppLayout({ theme, onToggleTheme }) {
             <Icon.Plus /> 新增
           </button>
 
-          {/* Logout */}
+          {/* 登出 */}
           <button
             onClick={handleLogout}
             title="登出"
@@ -143,7 +143,7 @@ export function AppLayout({ theme, onToggleTheme }) {
 
         {/* ── Main content ──────────────────────────────────────────────────── */}
         <main style={{ flex: 1, overflowY: 'auto', padding: 20, display: 'flex', flexDirection: 'column', gap: 14 }}>
-          {/* Toolbar row */}
+          {/* 工具列 */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ fontWeight: 500, fontSize: 14, color: 'var(--text)' }}>
