@@ -37,6 +37,7 @@ export function AuthPage({ mode }) {
       }
     } catch (e) {
       setError(e.response?.data?.message || '操作失敗，請稍後再試')
+    } finally {
       setLoading(false)
     }
   }

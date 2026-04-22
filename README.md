@@ -85,3 +85,11 @@ cd frontend && npm run test
 ```
 
 
+### 部署小坑
+- Mac 的 CPU 架構是 ARM64，但雲端伺服器幾乎都是 AMD64（x86_64），本地端若直接`docker build`會是建立 ARM64的`Image`
+- 和雲端架構不同，去導致出現奇怪的錯誤(Container跑不起來)
+- build 時候改成 `docker build --platform linux/amd64 \ -t asia-east1-docker.pkg.dev/...`
+- 前端用 VITE_API_URL 來決定打哪個 backend，但你 build image 時沒有設定這個環境變數，所以 baseURL 是空的，前端不知道 backend 在哪裡
+    - nginx.conf 加一個 proxy，把 /api/* 轉發到 backend service 的 port 去處理
+
+
