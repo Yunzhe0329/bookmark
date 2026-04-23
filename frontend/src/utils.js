@@ -1,7 +1,7 @@
 // utils.js 
 
 export function timeAgo(dateStr) {
-  const diff = (new Date() - new Date(dateStr)) / 1000;
+  const diff = (new Date() - new Date(dateStr + 'Z')) / 1000;
   if (diff < 60)          return '剛剛';
   if (diff < 3600)        return `${Math.floor(diff / 60)} 分鐘前`;
   if (diff < 86400)       return `${Math.floor(diff / 3600)} 小時前`;
